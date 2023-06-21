@@ -3,7 +3,7 @@ import './../styles/global.css'
 import Script from 'next/script'
 
 export const metadata = {
-  title: 'Painel Shoowpy',
+  title: '</Bibliotech>',
   description: 'Criado por amantes do bootstrap',
 }
 

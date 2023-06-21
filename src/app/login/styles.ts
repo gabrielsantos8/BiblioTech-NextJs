@@ -8,7 +8,7 @@ export const CardLogin = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    maxWidth: 330px;
+    
     padding: 1rem;
     width: 100vw;
     height: 100vh;
@@ -17,14 +17,53 @@ export const CardLogin = styled.div`
     font-color: #ADB5BD;
 `;
 
-export const CardEmail = styled.div`
+export const CardSenhaEmail = styled.div`
+    width: 55%;
     
 
 `;
 
 export const InputLogin = styled.input`
     background-color: #212529;   
-    border: 0.1px solid #ADB5BD;
+    border-color: #ADB5BD;
+    padding: 10px;
+    
 
 `;
+
+export const CardTitle = styled.div`
+    font-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20;
+    
+`;
+
+export const CardButton = styled.button`
+    width: 50%;
+    padding: 10px;
+    
+
+`;
+
+export const CardImage = styled.div`
+
+`;
+
+export const CardCopyright = styled.div`
+    color: #ADB5BD;
+    font-size: 16px;
+    
+`;
+
+export const CardRememberMe = styled.div`  
+    color: #ADB5BD;
+   
+`;
+
+export const CardForm = styled.form`
+    justify-content: center;
+`;
+
 

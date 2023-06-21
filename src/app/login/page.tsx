@@ -6,8 +6,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { setCookie } from 'nookies'
 import { useCallback, useRef, useState } from "react"
-import { CardLogin, InputLogin } from "./styles";
-import { CardEmail } from "./styles";
+import { CardButton, CardCopyright, CardForm, CardImage, CardLogin, CardRememberMe, CardSenhaEmail, CardTitle, InputLogin } from "./styles";
+
 
 export default function Login() {
 
@@ -75,42 +75,51 @@ export default function Login() {
         
             <CardLogin>
                 
+                <CardImage>
+                    
+                </CardImage>
+
+                
                     <div style={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                         // paddingTop: 20
                     }}>
-                        <h1 style={{ color: "#ADB5BD" }}>
-                            Por favor, inscreva-se.
+                        <h1 style={{
+                            color: "#ADB5BD",
+                            fontSize: "28px",
+                            padding: "10px",
+                            float: "inline-start"
+                            
+
+                        }}>
+                            Realize o login
                         </h1>
                     </div>
-                    <hr />
-                    <form
-                        className="row g-3 needs-validation"
+                
+                    <CardForm
+                        className="row g-1 needs-validation"
                         noValidate
-                        style={{
-                            // paddingBottom: 20
-                            alignItems: 'center'
-                        }}
                         ref={refForm}
                         onSubmit={submitForm}
 
                     >
-                        <CardEmail>
-                            <div className="input-group has-validadion">
-                                <InputLogin
-                                    type="email"
-                                    className="form-control"
-                                    placeholder="Digite o email"
-                                    id="email"
-                                    required
-                                />
-                                <div className="invalid-feedback">
-                                    Por favor digite seu email.
-                                </div>
+                        
+                    <CardSenhaEmail>
+                        <div className="input-group has-validadion">
+                            <InputLogin
+                                type="email"
+                                className="form-control"
+                                placeholder="Digite o email"
+                                id="email"
+                                required
+                            />
+                            <div className="invalid-feedback">
+                                Por favor digite seu email.
                             </div>
-                        </CardEmail>
+                        </div>
+                                                    
 
                         <div className="col-md-12">
 
@@ -125,17 +134,33 @@ export default function Login() {
                                 Por favor digite sua senha.
                             </div>
                         </div>
+                    </CardSenhaEmail>
+
+
+                    <CardRememberMe>
+                        <div className="form-check text-start my-3">
+                            <input className="form-check-input" type="checkbox" value={"remember me"} id="flexCheckDefault"></input>
+                            <label className="form-check-label" htmlFor="flexCheckDefault">Lembrar de mim</label> 
+                        </div>
+                    </CardRememberMe>
+
+
                         <div className="col-md-12">
-                            <button
+                            <CardButton
                                 className="btn btn-primary"
                                 type='submit'
                                 id="botao"
 
                             >
                                 Enviar
-                            </button>
+                            </CardButton>
+
+
+                            <CardCopyright>
+                                <p className="mt-5 mb-3">© 2023 - TrioDev</p>
+                            </CardCopyright>
                         </div>
-                    </form>
+                    </CardForm>
                 
             </CardLogin>
         </>
