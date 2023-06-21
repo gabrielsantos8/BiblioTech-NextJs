@@ -6,6 +6,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { setCookie } from 'nookies'
 import { useCallback, useRef, useState } from "react"
+import { CardLogin, InputLogin } from "./styles";
+import { CardEmail } from "./styles";
 
 export default function Login() {
 
@@ -70,31 +72,18 @@ export default function Login() {
                 onClose={() => {setToast(false)}}
             />
 
-            
-            <div style={{
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100vw',
-                height: '100vh'
-            }}>
-                <div style={{
-                    border: 2,
-                    borderColor: '#ccc',
-                    borderStyle: 'solid',
-                    padding: 20
-                }}>
+        
+            <CardLogin>
+                
                     <div style={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                         // paddingTop: 20
                     }}>
-                        <h1 style={{ color: "#0d6efd" }}>
-                            Login
+                        <h1 style={{ color: "#ADB5BD" }}>
+                            Por favor, inscreva-se.
                         </h1>
-                   
                     </div>
                     <hr />
                     <form
@@ -108,21 +97,9 @@ export default function Login() {
                         onSubmit={submitForm}
 
                     >
-                        <div className="col-md-12">
-                            <label
-                                htmlFor="email"
-                                className="form-label"
-                            >
-                                Email
-                            </label>
+                        <CardEmail>
                             <div className="input-group has-validadion">
-                                <span
-                                    className="input-group-text"
-                                // id="inputGroupPrepend"
-                                >
-                                    @
-                                </span>
-                                <input
+                                <InputLogin
                                     type="email"
                                     className="form-control"
                                     placeholder="Digite o email"
@@ -133,15 +110,11 @@ export default function Login() {
                                     Por favor digite seu email.
                                 </div>
                             </div>
-                        </div>
+                        </CardEmail>
+
                         <div className="col-md-12">
-                            <label
-                                htmlFor="senha"
-                                className="form-label"
-                            >
-                                Senha
-                            </label>
-                            <input
+
+                            <InputLogin
                                 type="password"
                                 className="form-control"
                                 placeholder="Digite sua senha"
@@ -163,8 +136,8 @@ export default function Login() {
                             </button>
                         </div>
                     </form>
-                </div>
-            </div>
+                
+            </CardLogin>
         </>
     )
 }
