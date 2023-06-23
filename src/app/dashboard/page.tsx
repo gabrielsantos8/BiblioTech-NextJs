@@ -18,7 +18,13 @@ export default function Dashboard() {
             active='dashboard'
             /*token={token.value}*/
         >
-            <h1>Seja Bem-vindo...</h1>
+            <h1 style={{fontFamily: "sans-serif",
+                        padding: "10px",
+                        color: "#00ADEF"
+        }}>
+            Seja Bem-vindo...
+        
+            </h1>
         </LayoutDashboard>
     )
 }
