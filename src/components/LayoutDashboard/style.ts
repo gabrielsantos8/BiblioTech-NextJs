@@ -1,4 +1,9 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import Link from "next/link";
+
+interface linkProps {
+  active: boolean;
+}
 
 export const Dashboard = styled.div`
   display: flex;
@@ -15,13 +20,10 @@ export const ImgLogo = styled.img`
   width: 100%;
 `;
 
-
 export const Sidebar = styled.div`
   flex: 0 0 317px;
   padding: 20px;
   background-color: #212529;
-  
-  
 `;
 
 export const SidebarTitle = styled.h6`
@@ -32,11 +34,13 @@ export const SidebarTitle = styled.h6`
   color: #6c757d;
 `;
 
-export const SidebarLink = styled.a`
+export const SidebarLink = styled(Link)<linkProps>`
   display: block;
   padding: 8px 1.5rem;
   color: #00adef;
   text-decoration: none;
+  background-color: rgba(13, 110, 253, 0.1);
+  background-color: ${(props: any) => props.active ? 'background-color: rgba(13, 110, 253, 0.1);' : `var(--red)`};
   font-size: 14px;
   margin-left: -20px;
 
@@ -52,14 +56,11 @@ export const SidebarLink = styled.a`
 
 export const User = styled.div`
   font-size: 30px;
-  
 `;
-
 
 export const Content = styled.div`
   flex: 1;
   padding: 20px;
-  
 `;
 
 export const ContentTitle = styled.h1`
@@ -71,3 +72,20 @@ export const ContentText = styled.p`
   color: #adb5bd;
 `;
 
+export const ButtonLogout = styled.button`
+  display: block;
+  padding: 8px 1.5rem;
+  color: #F33333;
+  text-decoration: none;
+  margin-left: -20px;
+  background-color: #00ABEF00;
+  border: none;
+  &:hover {
+    color: #F33333;
+    background-color: #F333331F;
+  }
+
+  .sidebar-icon {
+    margin-right: 0.5rem;
+  }
+`;

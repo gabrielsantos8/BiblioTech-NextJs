@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/jsonwebtoken": "^9.0.2",
     "@types/styled-components": "^5.1.26"
   }
 }

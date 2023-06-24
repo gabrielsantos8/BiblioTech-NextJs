@@ -4,8 +4,8 @@ import { Loading } from "@/components/Loading";
 import { ToastComponent } from "@/components/Toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { setCookie } from 'nookies'
-import { useCallback, useRef, useState } from "react"
+import { parseCookies, setCookie } from 'nookies'
+import { useCallback, useEffect, useRef, useState } from "react"
 import { ButtonConfig, CardButton, CardCopyright, CardForm, CardImage, CardLogin, CardRememberMe, CardSenhaEmail, CardTitle, ImgTriodev, InputLogin, SizeImage } from "./styles";
 
 
@@ -19,6 +19,13 @@ export default function Login() {
     const [toastMessage, setToastMessage] = useState('')
     const [email, setEmail] = useState('')
 
+    useEffect(() => {
+        const cookies = parseCookies();
+        const token = cookies["bibliotech.token"];
+        if (token) {
+            router.push('/dashboard');
+        }
+      }, []);
 
     const submitForm = useCallback((e: any) => {
         e.preventDefault();
@@ -33,12 +40,21 @@ export default function Login() {
                 objSalvar
             )
                 .then((resposta) => {
-                    console.log(resposta.data)
 
                     setCookie(
                         undefined,
-                        'shoopypainel.token',
+                        'bibliotech.token',
                         resposta.data.token,
+                        {
+                            maxAge: 60 * 60 * 24 * 30,
+                            path: '/'
+                        }
+                    )
+
+                    setCookie(
+                        resposta.data.user,
+                        'bibliotech.usuario',
+                        resposta.data.user,
                         {
                             maxAge: 60 * 60 * 24 * 30,
                             path: '/'
