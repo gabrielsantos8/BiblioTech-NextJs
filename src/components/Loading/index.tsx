@@ -13,7 +13,7 @@ export const Loading = (props: interfLoading) => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    backgroundColor: 'rgb(0,0,0,0.3)'
+                    backgroundColor: 'rgba(0, 5, 34, 0.5)'
                 }}
             >
                 <div className="spinner-border"

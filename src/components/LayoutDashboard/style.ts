@@ -7,7 +7,8 @@ interface linkProps {
 
 export const Dashboard = styled.div`
   display: flex;
-  height: 100vh;
+  width: 100%;
+  height: 1000px;
   background-color: #2b3035;
   color: #adb5bd;
 `;
@@ -21,8 +22,10 @@ export const ImgLogo = styled.img`
 `;
 
 export const Sidebar = styled.div`
-  flex: 0 0 317px;
+  flex: 0 0 200px;
   padding: 20px;
+  width: 100%;
+
   background-color: #212529;
 `;
 

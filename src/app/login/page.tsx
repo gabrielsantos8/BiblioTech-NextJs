@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { parseCookies, setCookie } from 'nookies'
 import { useCallback, useEffect, useRef, useState } from "react"
 import { ButtonConfig, CardButton, CardCopyright, CardForm, CardImage, CardLogin, CardRememberMe, CardSenhaEmail, CardTitle, ImgTriodev, InputLogin, SizeImage } from "./styles";
+import { verificaTokenExpirou } from "@/services/Token";
 
 
 export default function Login() {
@@ -22,7 +23,7 @@ export default function Login() {
     useEffect(() => {
         const cookies = parseCookies();
         const token = cookies["bibliotech.token"];
-        if (token) {
+        if (token || !verificaTokenExpirou(token)) {
             router.push('/dashboard');
         }
       }, []);
