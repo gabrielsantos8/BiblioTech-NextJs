@@ -1,103 +1,97 @@
-"use client"
-
-import { validaPermissao } from "@/services/Token"
-import Link from "next/link"
-import { ReactNode } from "react"
-import { Content, ContentText, ContentTitle, Dashboard, Divisor, ImgLogo, Sidebar, SidebarLink, SidebarTitle, Space, SpaceDiv } from "./style"
-import { Nav } from "react-bootstrap"
-import { PersonFill, BuildingFill, MortarboardFill, GearFill, Escape, PeopleFill, HouseDoorFill, BookFill, PenFill, PersonCircle, ChevronDown } from 'react-bootstrap-icons';
-
+"use client";
+import { ReactNode } from "react";
+import {
+  ButtonLogout,
+  Content,
+  ContentText,
+  ContentTitle,
+  Dashboard,
+  Divisor,
+  ImgLogo,
+  Sidebar,
+  SidebarLink,
+  SidebarTitle
+} from "./style";
+import { Nav } from "react-bootstrap";
+import {
+  PersonFill,
+  BuildingFill,
+  MortarboardFill,
+  Escape,
+  PeopleFill,
+  HouseDoorFill,
+  BookFill,
+  PenFill
+} from "react-bootstrap-icons";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 interface interfProps {
-    children: ReactNode
-    active: string
-    token: string | undefined
+  children: ReactNode;
+  active: string;
 }
 export const LayoutDashboard = (props: interfProps) => {
+  const router = useRouter();
 
-    return (
-        <>
-            <Dashboard>
-      <Sidebar>
-        <SidebarTitle><ImgLogo src="img/dashboardlogo.png" /></SidebarTitle>
-        <Divisor/>
-        <SidebarLink href="#">
+  const logout = function () {
+    axios.post("http://localhost:3000/api/logout").then((resposta) => {
+      router.push("/login");
+    });
+  };
+
+  return (
+    <>
+      <Dashboard>
+        <Sidebar>
+          <SidebarTitle>
+            <ImgLogo src="img/dashboardlogo.png" />
+          </SidebarTitle>
+          <Divisor />
+          <SidebarLink href="#" active={props.active === "dashboard"}>
             <HouseDoorFill className="sidebar-icon" />
             Dashboard
-        </SidebarLink>
-        <SidebarLink href="#">
+          </SidebarLink>
+          <SidebarLink href="#" active={props.active === "usuarios"}>
             <PersonFill className="sidebar-icon" />
             Usuários
-        </SidebarLink>
-        <SidebarLink href="#">
+          </SidebarLink>
+          <SidebarLink href="#" active={props.active === "usuarios"}>
             <PeopleFill className="sidebar-icon" />
             Alunos
-        </SidebarLink>
-        <SidebarLink href="#">
+          </SidebarLink>
+          <SidebarLink href="#" active={props.active === "livro"}>
             <BookFill className="sidebar-icon" />
             Livros
-        </SidebarLink>
-        <SidebarLink href="#">
+          </SidebarLink>
+          <SidebarLink href="#" active={props.active === "curso"}>
             <MortarboardFill className="sidebar-icon" />
             Cursos
-        </SidebarLink>
-        <SidebarLink href="#">
+          </SidebarLink>
+          <SidebarLink href="#" active={props.active === "editora"}>
             <BuildingFill className="sidebar-icon" />
             Editora
-        </SidebarLink>
-        <SidebarLink href="#">
+          </SidebarLink>
+          <SidebarLink href="#" active={props.active === "autor"}>
             <PenFill className="sidebar-icon" />
             Autor
-        </SidebarLink>
-            
-        <SpaceDiv>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        <Space/>
-        </SpaceDiv>
-        <Divisor/>
+          </SidebarLink>
 
-        <SidebarLink href="#">
-            <PersonCircle className="sidebar-icon" />
-            <ChevronDown className="sidebar-icon" />  
-        </SidebarLink>
-        <SidebarLink href="#">
-            <GearFill className="sidebar-icon" />
-            Configurações
-        </SidebarLink>       
-        <SidebarLink href="#">
+          <Divisor />
+
+          <ButtonLogout
+            onClick={() => {
+              logout();
+            }}
+          >
             <Escape className="sidebar-icon" />
             Sair
-        </SidebarLink>
-
-
-        
-
-
-      </Sidebar>
-      <Content>
-        <ContentTitle>Dashboard</ContentTitle>
-        <ContentText>Seja bem-vindo...</ContentText>
-      </Content>
-    </Dashboard>
-
-
-        </>
-    )
-}
+          </ButtonLogout>
+        </Sidebar>
+        <Content>
+          {props.children}
+          <ContentTitle>{props.active[0].toUpperCase() + props.active.substring(1)}</ContentTitle>
+        </Content>
+      </Dashboard>
+    </>
+  );
+};

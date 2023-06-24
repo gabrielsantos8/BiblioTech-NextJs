@@ -1,17 +1,21 @@
 import jwt_decoded from 'jwt-decode'
+import { cookies } from 'next/headers';
 
 export const verificaTokenExpirou = (token: string | undefined) => {
+    const cookie = cookies();
     if (token) {
         let decodedToken: any = jwt_decoded(token);
 
         if (decodedToken != null) {
             if (decodedToken.exp < new Date().getTime() / 1000) {
+                cookie.delete('bibliotech.token')
                 return true
             }
             return false
         }
         return false
     }
+    cookie.delete('bibliotech.token')
     return true;
 }
 
