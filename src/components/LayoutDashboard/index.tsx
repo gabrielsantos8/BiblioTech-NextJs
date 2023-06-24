@@ -44,18 +44,18 @@ export const LayoutDashboard = (props: interfProps) => {
       <Dashboard>
         <Sidebar>
           <SidebarTitle>
-            <ImgLogo src="img/dashboardlogo.png" />
+            <ImgLogo src="/img/dashboardlogo.png" />
           </SidebarTitle>
           <Divisor />
-          <SidebarLink href="#" active={props.active === "dashboard"}>
+          <SidebarLink href="/dashboard" active={props.active === "dashboard"}>
             <HouseDoorFill className="sidebar-icon" />
             Dashboard
           </SidebarLink>
-          <SidebarLink href="#" active={props.active === "usuarios"}>
+          <SidebarLink href="/usuarios" active={props.active === "usuarios"}>
             <PersonFill className="sidebar-icon" />
             Usuários
           </SidebarLink>
-          <SidebarLink href="#" active={props.active === "usuarios"}>
+          <SidebarLink href="#" active={props.active === "alunos"}>
             <PeopleFill className="sidebar-icon" />
             Alunos
           </SidebarLink>
@@ -88,8 +88,8 @@ export const LayoutDashboard = (props: interfProps) => {
           </ButtonLogout>
         </Sidebar>
         <Content>
-          {props.children}
           <ContentTitle>{props.active[0].toUpperCase() + props.active.substring(1)}</ContentTitle>
+          {props.children}
         </Content>
       </Dashboard>
     </>
