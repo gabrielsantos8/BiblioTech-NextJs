@@ -8,7 +8,6 @@ export default function Dashboard() {
     const cookie = cookies();
     const token = cookie.get('bibliotech.token')
     if (!token?.value || verificaTokenExpirou(token.value)) {
-        cookie.delete('bibliotech.token');
         redirect('/login')
     }
 
