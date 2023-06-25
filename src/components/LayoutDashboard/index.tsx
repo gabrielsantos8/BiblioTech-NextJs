@@ -19,7 +19,8 @@ import {
   PeopleFill,
   HouseDoorFill,
   BookFill,
-  PenFill
+  PenFill,
+  CalendarCheckFill
 } from "react-bootstrap-icons";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -67,11 +68,15 @@ export const LayoutDashboard = (props: interfProps) => {
           </SidebarLink>
           <SidebarLink href="/editoras" active={props.active === "editoras"}>
             <BuildingFill className="sidebar-icon" />
-            Editora
+            Editoras
           </SidebarLink>
           <SidebarLink href="/autores" active={props.active === "autores"}>
             <PenFill className="sidebar-icon" />
-            Autor
+            Autores
+          </SidebarLink>
+          <SidebarLink href="/reservas" active={props.active === "reservas"}>
+            <CalendarCheckFill className="sidebar-icon" />
+            Reservas
           </SidebarLink>
 
           <Divisor />
