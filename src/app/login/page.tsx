@@ -18,7 +18,6 @@ export default function Login() {
     const [loading, setLoading] = useState(false)
     const [toast, setToast] = useState(false)
     const [toastMessage, setToastMessage] = useState('')
-    const [email, setEmail] = useState('')
 
     useEffect(() => {
         const cookies = parseCookies();

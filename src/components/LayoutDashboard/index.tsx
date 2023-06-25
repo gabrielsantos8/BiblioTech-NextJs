@@ -3,7 +3,6 @@ import { ReactNode } from "react";
 import {
   ButtonLogout,
   Content,
-  ContentText,
   ContentTitle,
   Dashboard,
   Divisor,
@@ -12,7 +11,6 @@ import {
   SidebarLink,
   SidebarTitle
 } from "./style";
-import { Nav } from "react-bootstrap";
 import {
   PersonFill,
   BuildingFill,
@@ -55,23 +53,23 @@ export const LayoutDashboard = (props: interfProps) => {
             <PersonFill className="sidebar-icon" />
             Usuários
           </SidebarLink>
-          <SidebarLink href="#" active={props.active === "alunos"}>
+          <SidebarLink href="/alunos" active={props.active === "alunos"}>
             <PeopleFill className="sidebar-icon" />
             Alunos
           </SidebarLink>
-          <SidebarLink href="#" active={props.active === "livro"}>
+          <SidebarLink href="/livros" active={props.active === "livro"}>
             <BookFill className="sidebar-icon" />
             Livros
           </SidebarLink>
-          <SidebarLink href="#" active={props.active === "curso"}>
+          <SidebarLink href="/cursos" active={props.active === "curso"}>
             <MortarboardFill className="sidebar-icon" />
             Cursos
           </SidebarLink>
-          <SidebarLink href="#" active={props.active === "editora"}>
+          <SidebarLink href="/editoras" active={props.active === "editora"}>
             <BuildingFill className="sidebar-icon" />
             Editora
           </SidebarLink>
-          <SidebarLink href="#" active={props.active === "autor"}>
+          <SidebarLink href="/autores" active={props.active === "autor"}>
             <PenFill className="sidebar-icon" />
             Autor
           </SidebarLink>
