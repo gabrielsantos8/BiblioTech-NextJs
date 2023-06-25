@@ -89,4 +89,24 @@ export const CardForm = styled.form`
     padding: 10px;
 `;
 
+export const InputSelect = styled.select`
+     background-color: #212529;
+    border-color: black;
+    border-radius: 100px;  
+    margin: 5px;
+    display: block;
+    color: gray;
+    width: 100%;
+    padding: 10px;
+
+    ::placeholder{
+        color: gray;
+    }
+
+    &:focus{
+        background-color: #212529;
+        color: gray;
+    }
+`;
+
 
