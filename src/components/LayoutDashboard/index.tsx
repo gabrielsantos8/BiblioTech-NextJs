@@ -57,19 +57,19 @@ export const LayoutDashboard = (props: interfProps) => {
             <PeopleFill className="sidebar-icon" />
             Alunos
           </SidebarLink>
-          <SidebarLink href="/livros" active={props.active === "livro"}>
+          <SidebarLink href="/livros" active={props.active === "livros"}>
             <BookFill className="sidebar-icon" />
             Livros
           </SidebarLink>
-          <SidebarLink href="/cursos" active={props.active === "curso"}>
+          <SidebarLink href="/cursos" active={props.active === "cursos"}>
             <MortarboardFill className="sidebar-icon" />
             Cursos
           </SidebarLink>
-          <SidebarLink href="/editoras" active={props.active === "editora"}>
+          <SidebarLink href="/editoras" active={props.active === "editoras"}>
             <BuildingFill className="sidebar-icon" />
             Editora
           </SidebarLink>
-          <SidebarLink href="/autores" active={props.active === "autor"}>
+          <SidebarLink href="/autores" active={props.active === "autores"}>
             <PenFill className="sidebar-icon" />
             Autor
           </SidebarLink>
