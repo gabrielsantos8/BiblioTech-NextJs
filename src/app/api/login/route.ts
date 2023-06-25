@@ -14,7 +14,7 @@ export async function POST(req: Request) {
       let objUsuario = usuario.data.dados[0];
       delete objUsuario.password;
       const token = jwt.sign(objUsuario, "123456", {
-        expiresIn: 60 * 60,
+        expiresIn: 60 * 720,
       });
       return NextResponse.json({ token: token, user: objUsuario.name});
   }
