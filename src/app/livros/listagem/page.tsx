@@ -27,25 +27,39 @@ import {
 } from "@/app/login/styles";
 import { ToastComponent } from "@/components/Toast";
 
-interface alunosProps {
+interface livrosProps {
   id: number;
-  nome: string;
-  ra: string;
-  endereco: string;
-  cidade: string;
-  uf: string;
-  telefone: string;
-  curso_id: number;
-  curso: string;
+  titulo: string;
+  subtitulo: string;
+  isbn: number;
+  autor_id: number;
+  autor: string;
+  editora_id: number;
+  editora: string;
+  local: string;
+  ano: number;
   created_at: string;
   updated_at: string;
 }
 
-interface cursosProps {
+interface autoresProps {
   id: number;
   nome: string;
-  coordenador: string;
-  duracao: number;
+  endereco: string;
+  cidade: string;
+  uf: string;
+  telefone: string;
+  created_at: string;
+  updated_at: string;
+}
+
+interface editorasProps {
+  id: number;
+  nome: string;
+  endereco: string;
+  cidade: string;
+  uf: string;
+  telefone: string;
   created_at: string;
   updated_at: string;
 }
@@ -55,43 +69,52 @@ export default function Listagem() {
   const [loading, setLoading] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [toast, setToast] = useState(false);
-  const [alunos, setAlunos] = useState<Array<alunosProps>>();
-  const [cursos, setCursos] = useState<Array<cursosProps>>();
+  const [livros, setLivros] = useState<Array<livrosProps>>();
+  const [autores, setAutores] = useState<Array<autoresProps>>();
+  const [editoras, setEditoras] = useState<Array<editorasProps>>();
   const [showModal, setShowModal] = useState(false);
-  const [selectedAluno, setSelectedAluno] = useState<alunosProps>();
+  const [selectedLivro, setSelectedLivro] = useState<livrosProps>();
 
-  const openModal = (aluno: alunosProps) => {
-    setSelectedAluno(aluno);
+  const openModal = (livro: livrosProps) => {
+    setSelectedLivro(livro);
     setShowModal(true);
   };
 
   useEffect(() => {
     setLoading(true);
-    loadAlunos();
-    loadCursos();
+    loadLivros();
+    loadAutores();
+    loadEditoras();
   }, []);
 
-  const loadAlunos = function () {
-    axios.get("http://localhost:3000/api/alunos").then((resposta) => {
-      setAlunos(resposta.data.alunos);
+  const loadLivros = function () {
+    axios.get("http://localhost:3000/api/livros").then((resposta) => {
+      setLivros(resposta.data.livros);
       setLoading(false);
     });
   };
 
-  const loadCursos = function () {
-    axios.get("http://localhost:3000/api/cursos").then((resposta) => {
-      setCursos(resposta.data.cursos);
+  const loadAutores = function () {
+    axios.get("http://localhost:3000/api/autores").then((resposta) => {
+      setAutores(resposta.data.autores);
       setLoading(false);
     });
   };
 
-  const excluirAlunos = useCallback((id: number) => {
+  const loadEditoras = function () {
+    axios.get("http://localhost:3000/api/editoras").then((resposta) => {
+      setEditoras(resposta.data.editoras);
+      setLoading(false);
+    });
+  };
+
+  const excluirLivros = useCallback((id: number) => {
     setLoading(true);
     axios
-      .delete("http://localhost:3000/api/alunos?id=" + id)
+      .delete("http://localhost:3000/api/livros?id=" + id)
       .then((resposta) => {
         setLoading(false);
-        loadAlunos();
+        loadLivros();
       })
       .catch((err) => {
         setToastMessage(err.message);
@@ -106,18 +129,18 @@ export default function Listagem() {
       setLoading(true);
       const objAtualizar = {
         id: e.target.id.value,
-        nome: e.target.nome.value,
-        ra: e.target.ra.value,
-        endereco: e.target.endereco.value,
-        cidade: e.target.cidade.value,
-        uf: e.target.uf.value,
-        telefone: e.target.telefone.value,
-        curso_id: e.target.curso_id.value,
+        titulo: e.target.titulo.value,
+        subtitulo: e.target.subtitulo.value,
+        isbn: e.target.isbn.value,
+        autor_id: e.target.autor_id.value,
+        editora_id: e.target.editora_id.value,
+        local: e.target.local.value,
+        ano: e.target.ano.value,
       };
       axios
-        .put("http://localhost:3000/api/alunos", objAtualizar)
+        .put("http://localhost:3000/api/livros", objAtualizar)
         .then((resposta) => {
-          loadAlunos();
+          loadLivros();
           setShowModal(false);
           setLoading(false);
         })
@@ -142,45 +165,45 @@ export default function Listagem() {
         }}
       />
       <Loading loading={loading} />
-      <LayoutDashboard active="alunos">
+      <LayoutDashboard active="livros">
         <ButtonWrapper>
-          <ButtonCad href={"/alunos/cadastro"}>Cadastrar</ButtonCad>
+          <ButtonCad href={"/livros/cadastro"}>Cadastrar</ButtonCad>
         </ButtonWrapper>
         <TableWrapper>
           <Table>
             <thead>
               <TableRow>
                 <TableHeader>ID</TableHeader>
-                <TableHeader>Nome</TableHeader>
-                <TableHeader>RA</TableHeader>
-                <TableHeader>Endereço</TableHeader>
-                <TableHeader>Cidade</TableHeader>
-                <TableHeader>UF</TableHeader>
-                <TableHeader>Telefone</TableHeader>
-                <TableHeader>Curso</TableHeader>
+                <TableHeader>Título</TableHeader>
+                <TableHeader>Sub-Título</TableHeader>
+                <TableHeader>ISBN</TableHeader>
+                <TableHeader>Autor</TableHeader>
+                <TableHeader>Editora</TableHeader>
+                <TableHeader>Local</TableHeader>
+                <TableHeader>Ano</TableHeader>
                 <TableHeader>Ações</TableHeader>
               </TableRow>
             </thead>
             <tbody>
-              {alunos?.map((rec, index) => {
+              {livros?.map((rec, index) => {
                 return (
                   <>
                     <TableRow>
                       <TableCell key={index}>{rec.id}</TableCell>
-                      <TableCell>{rec.nome}</TableCell>
-                      <TableCell>{rec.ra}</TableCell>
-                      <TableCell>{rec.endereco}</TableCell>
-                      <TableCell>{rec.cidade}</TableCell>
-                      <TableCell>{rec.uf}</TableCell>
-                      <TableCell>{rec.endereco}</TableCell>
-                      <TableCell>{rec.curso}</TableCell>
+                      <TableCell>{rec.titulo}</TableCell>
+                      <TableCell>{rec.subtitulo}</TableCell>
+                      <TableCell>{rec.isbn}</TableCell>
+                      <TableCell>{rec.autor}</TableCell>
+                      <TableCell>{rec.editora}</TableCell>
+                      <TableCell>{rec.local}</TableCell>
+                      <TableCell>{rec.ano}</TableCell>
                       <TableCell>
                         <ButtonEdit onClick={() => openModal(rec)}>
                           <Pencil />
                         </ButtonEdit>
                         <ButtonDel
                           onClick={() => {
-                            excluirAlunos(rec.id);
+                            excluirLivros(rec.id);
                           }}
                         >
                           <Trash3></Trash3>
@@ -196,10 +219,10 @@ export default function Listagem() {
       </LayoutDashboard>
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton className="bg-dark text-white">
-          <Modal.Title>Editar Aluno</Modal.Title>
+          <Modal.Title>Editar Livro</Modal.Title>
         </Modal.Header>
         <Modal.Body className="bg-dark text-white">
-          {selectedAluno && <p>Editando : {selectedAluno.nome}</p>}
+          {selectedLivro && <p>Editando : {selectedLivro.titulo}</p>}
           <CardForm
             className="row g-1 needs-validation"
             noValidate
@@ -212,21 +235,37 @@ export default function Listagem() {
                   type="number"
                   id="id"
                   name="id"
-                  defaultValue={selectedAluno?.id}
+                  defaultValue={selectedLivro?.id}
                   hidden
                 />
                 <InputLogin
                   type="text"
                   className="form-control"
-                  placeholder="Digite o nome do aluno"
-                  id="nome"
-                  name="nome"
-                  defaultValue={selectedAluno?.nome}
+                  placeholder="Digite o titulo do livro"
+                  id="titulo"
+                  name="titulo"
+                  defaultValue={selectedLivro?.titulo}
                   required
                 />
 
                 <div className="invalid-feedback">
-                  Por favor digite o nome do aluno.
+                  Por favor digite o titulo do livro.
+                </div>
+              </div>
+
+              <div className="col-md-12">
+                <InputLogin
+                  type="text"
+                  className="form-control"
+                  placeholder="Digite o sub-título do livro"
+                  id="subtitulo"
+                  name="subtitulo"
+                  defaultValue={selectedLivro?.subtitulo}
+                  required
+                />
+
+                <div className="invalid-feedback">
+                  Por favor digite o sub-título do livro.
                 </div>
               </div>
 
@@ -234,96 +273,85 @@ export default function Listagem() {
                 <InputLogin
                   type="number"
                   className="form-control"
-                  placeholder="Digite o RA do aluno"
-                  id="ra"
-                  name="ra"
-                  defaultValue={selectedAluno?.ra}
+                  placeholder="Digite o ISBN do livro"
+                  id="isbn"
+                  name="isbn"
+                  defaultValue={selectedLivro?.isbn}
                   required
                 />
 
                 <div className="invalid-feedback">
-                  Por favor digite o RA do aluno.
-                </div>
-              </div>
-
-              <div className="col-md-12">
-                <InputLogin
-                  type="string"
-                  className="form-control"
-                  placeholder="Digite o endereço do aluno"
-                  id="endereco"
-                  name="endereco"
-                  defaultValue={selectedAluno?.endereco}
-                  required
-                />
-
-                <div className="invalid-feedback">
-                  Por favor digite o endereço do aluno.
-                </div>
-              </div>
-              <div className="col-md-12">
-                <InputLogin
-                  type="string"
-                  className="form-control"
-                  placeholder="Digite a cidade do aluno"
-                  id="cidade"
-                  name="cidade"
-                  defaultValue={selectedAluno?.cidade}
-                  required
-                />
-
-                <div className="invalid-feedback">
-                  Por favor digite a cidade do aluno.
-                </div>
-              </div>
-              <div className="col-md-12">
-                <InputLogin
-                  type="string"
-                  className="form-control"
-                  placeholder="Digite a UF do aluno"
-                  id="uf"
-                  name="uf"
-                  defaultValue={selectedAluno?.uf}
-                  required
-                />
-
-                <div className="invalid-feedback">
-                  Por favor digite a UF do aluno.
-                </div>
-              </div>
-              <div className="col-md-12">
-                <InputLogin
-                  type="number"
-                  className="form-control"
-                  placeholder="Digite a telefone do aluno"
-                  id="telefone"
-                  name="telefone"
-                  defaultValue={selectedAluno?.telefone}
-                  required
-                />
-
-                <div className="invalid-feedback">
-                  Por favor digite a telefone do aluno.
+                  Por favor digite o ISBN do livro.
                 </div>
               </div>
               <div className="col-md-12">
                 <InputSelect
-                  name="curso_id"
-                  id="curso_id"
+                  name="autor_id"
+                  id="autor_id"
                   required
-                  defaultValue={selectedAluno?.curso_id}
+                  defaultValue={selectedLivro?.autor_id}
                 >
-                  {cursos?.map((curso, index) => {
+                  {autores?.map((autor, index) => {
                     return (
                       <>
-                        <option value={curso.id}>{curso?.nome}</option>
+                        <option value={autor.id}>{autor?.nome}</option>
                       </>
                     );
                   })}
                 </InputSelect>
 
                 <div className="invalid-feedback">
-                  Por favor selecione o curso do aluno.
+                  Por favor selecione o autor do livro.
+                </div>
+              </div>
+              <div className="col-md-12">
+                <InputSelect
+                  name="editora_id"
+                  id="editora_id"
+                  required
+                  defaultValue={selectedLivro?.editora_id}
+                >
+                  {editoras?.map((editora, index) => {
+                    return (
+                      <>
+                        <option value={editora.id}>{editora?.nome}</option>
+                      </>
+                    );
+                  })}
+                </InputSelect>
+
+                <div className="invalid-feedback">
+                  Por favor selecione a editora do livro.
+                </div>
+              </div>
+              <div className="col-md-12">
+                <InputLogin
+                  type="string"
+                  className="form-control"
+                  placeholder="Digite o local do livro"
+                  id="local"
+                  name="local"
+                  defaultValue={selectedLivro?.local}
+                  required
+                />
+
+                <div className="invalid-feedback">
+                  Por favor digite o local do livro.
+                </div>
+              </div>
+              <div className="col-md-12">
+                <InputLogin
+                  type="number"
+                  className="form-control"
+                  placeholder="Digite o ano do livro"
+                  id="ano"
+                  name="ano"
+                  defaultValue={selectedLivro?.ano}
+                  required
+                />
+
+                <div className="invalid-feedback">
+                  Por favor digite o ano do livro.
                 </div>
               </div>
             </div>
